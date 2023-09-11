@@ -120,10 +120,8 @@ export default class GameOverScene extends AScene {
   }
 
   private _computeScore(): number {
-    const accuracy = 1 - this._incorrect / (this._correct - this._incorrect);
-    return Math.round(
-      Math.max(0, 1 - this._time / 20000) * 900 +
-      Math.max(0, (Math.pow(accuracy, 7))) * 500
-    )
+    const accuracy = 1 - Math.min(1, this._incorrect / (this._correct - this._incorrect));
+    const time = Math.max(0, 1 - this._time / 60000)
+    return Math.round(1200 * time * accuracy * accuracy * accuracy);
   }
 }
